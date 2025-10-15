@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tu Marca — Más allá del servicio</title>
+  <meta name="description" content="Landing page moderna y rápida para tu proyecto">
+  <meta name="theme-color" content="#111827">
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Tu Marca — Más allá del servicio">
+  <meta property="og:description" content="Landing page moderna y rápida para tu proyecto">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Tu+Marca">
+  <style>
+    /* ========= Reset mínimo y tipografía ========= */
+    :root{
+      --bg: #0b1020;
+      --bg-soft:#0f152b;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --brand:#6d5ef7;
+      --brand-2:#a78bfa;
+      --card:#111827;
+      --ring: 0 0 0 3px rgba(109,94,247,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --maxw: 1100px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#ffffff; --bg-soft:#f5f7fb; --text:#0b1020; --muted:#4b5563;
+        --card:#ffffff; --shadow: 0 10px 30px rgba(17,24,39,.08);
+      }
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg) 0%, var(--bg-soft) 100%);
+      color:var(--text); line-height:1.6;
+    }
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--maxw); margin-inline:auto; padding:0 20px}
+    .grid{display:grid; gap:24px}
+    .shadow{box-shadow:var(--shadow)}
+    .card{background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:24px}
+    .muted{color:var(--muted)}
+    .section{padding:80px 0}
+    .section.sm{padding:56px 0}
+    h1,h2,h3{line-height:1.2; margin:0 0 12px}
+    h1{font-size:clamp(2rem, 4vw, 3.2rem); letter-spacing:-.02em}
+    h2{font-size:clamp(1.5rem, 2.6vw, 2.2rem)}
+    h3{font-size:1.125rem}
+    /* ========= Navbar ========= */
+    .nav{
+      position:sticky; top:0; z-index:50; backdrop-filter: blur(8px);
+      background: color-mix(in oklab, var(--bg) 70%, transparent);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{display:flex; align-items:center; gap:16px; justify-content:space-between; height:64px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .logo{
+      width:28px; height:28px; border-radius:8px; background:
+        radial-gradient(80% 80% at 30% 30%, var(--brand-2), transparent 60%),
+        linear-gradient(135deg,var(--brand), #4f46e5);
+      box-shadow:0 6px 20px rgba(109,94,247,.5);
+    }
+    .nav-links{display:flex; gap:18px}
+    .nav-links a{opacity:.9}
+    .nav-actions{display:flex; gap:10px; align-items:center}
+    /* ========= Botón reutilizable ========= */
+    .btn{
+      --_bg: var(--brand); --_fg:#fff; --_bd: transparent;
+      display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+      padding:12px 18px; border-radius:14px; border:1px solid var(--_bd);
+      background:var(--_bg); color:var(--_fg); font-weight:700; letter-spacing:.01em;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+      box-shadow:0 10px 20px rgba(109,94,247,.25);
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:focus-visible{outline:none; box-shadow: var(--ring)}
+    .btn:active{transform: translateY(0)}
+    .btn.secondary{
+      --_bg: color-mix(in oklab, var(--card) 80%, transparent);
+      --_fg: var(--text);
+      --_bd: rgba(255,255,255,.12);
+      box-shadow:none;
+    }
+    .btn.ghost{
+      --_bg: transparent; --_fg: var(--text); --_bd: rgba(255,255,255,.18);
+      backdrop-filter: blur(6px);
+    }
+    .btn.sm{padding:8px 12px; border-radius:12px; font-weight:600}
+    .btn.lg{padding:14px 22px; font-size:1.05rem}
+    /* ========= Hero ========= */
+    .hero{
+      display:grid; align-items:center; min-height:72vh; padding-top:24px
+    }
+    .hero-badge{
+      display:inline-flex; align-items:center; gap:8px; padding:6px 10px;
+      border-radius:999px; border:1px solid rgba(255,255,255,.12);
+      background: color-mix(in oklab, var(--card) 70%, transparent);
+      font-size:.85rem
+    }
+    .hero-img{
+      aspect-ratio: 16/11; border-radius:var(--radius); overflow:hidden; position:relative
+    }
+    .hero-img::after{
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(60% 60% at 70% 20%, rgba(109,94,247,.35), transparent 60%);
+      pointer-events:none
+    }
+    /* ========= Secciones ========= */
+    .features{grid-template-columns: repeat(12, 1fr)}
+    .feature{grid-column: span 4; min-height: 100%}
+    @media (max-width: 900px){
+      .feature{grid-column: span 6}
+    }
+    @media (max-width: 640px){
+      .feature{grid-column: 1/-1}
+    }
+    /* ========= Precios ========= */
+    .pricing{grid-template-columns: repeat(12, 1fr)}
+    .plan{grid-column: span 4}
+    .plan.pop{border:2px solid var(--brand); transform: translateY(-4px)}
+    .price{font-size:2.2rem; font-weight:800}
+    /* ========= Formulario ========= */
+    .field{display:flex; flex-direction:column; gap:8px}
+    .input, textarea{
+      padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+      background: color-mix(in oklab, var(--card) 80%, transparent);
+      color:var(--text)
+    }
+    .input:focus, textarea:focus{outline:none; box-shadow: var(--ring)}
+    textarea{min-height:120px; resize:vertical}
+    /* ========= Footer ========= */
+    footer{border-top:1px solid rgba(255,255,255,.08)}
+    .footer-grid{display:grid; gap:24px; grid-template-columns: repeat(12, 1fr)}
+    .f-col{grid-column: span 3}
+    @media (max-width: 900px){ .f-col{grid-column: span 6}}
+    @media (max-width: 640px){ .f-col{grid-column: 1/-1}}
+    /* ========= Utilidades pequeñas ========= */
+    .center{display:flex; align-items:center; justify-content:center}
+    .pill{padding:6px 10px; border:1px solid rgba(255,255,255,.12); border-radius:999px}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+  <!-- ============== NAVBAR ============== -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#">
+        <span class="logo" aria-hidden="true"></span>
+        <span>TuMarca</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Características</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn sm ghost" id="toggle-theme" aria-label="Cambiar tema">🌓</button>
+        <a href="#contacto" class="btn sm">Comenzar</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============== HERO ============== -->
+  <header class="section">
+    <div class="container hero grid" style="grid-template-columns: 1.2fr .8fr; gap:32px;">
+      <div>
+        <span class="hero-badge">✨ Nuevo — Landing ultra rápida</span>
+        <h1>Más allá del marketing: <br/>una web que <em>convierte</em>.</h1>
+        <p class="muted">Plantilla minimal con buenas prácticas: rendimiento, accesibilidad, SEO básico y UI consistente. Personalízala y lánzala hoy.</p>
+        <div style="display:flex; gap:12px; margin-top:18px">
+          <a class="btn lg" href="#precios">Probar ahora</a>
+          <a class="btn lg secondary" href="#features">Ver características</a>
+        </div>
+        <ul class="muted" style="margin-top:18px; padding-left:18px">
+          <li>✅ Sin dependencias</li>
+          <li>✅ Modo oscuro/ligero</li>
+          <li>✅ Componentes reutilizables</li>
+        </ul>
+      </div>
+      <div class="hero-img shadow card center">
+        <!-- Reemplaza esta imagen con la de tu producto -->
+        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1200&auto=format&fit=crop" alt="Mockup del producto" style="border-radius:12px;">
+      </div>
+    </div>
+  </header>
+
+  <!-- ============== FEATURES ============== -->
+  <section id="features" class="section">
+    <div class="container">
+      <h2>Diseñado para crecer contigo</h2>
+      <p class="muted">Componentes simples, escalables y fáciles de mantener.</p>
+      <div class="grid features" style="margin-top:24px">
+        <article class="card feature shadow">
+          <h3>⚡ Performance</h3>
+          <p>Carga rápida, CSS mínimo y sin frameworks pesados.</p>
+        </article>
+        <article class="card feature shadow">
+          <h3>🎯 Conversión</h3>
+          <p>Hero claro, CTAs visibles y estructura probada.</p>
+        </article>
+        <article class="card feature shadow">
+          <h3>🧩 Componentes</h3>
+          <p>Botones, tarjetas y formularios consistentes y reutilizables.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== TESTIMONIOS ============== -->
+  <section class="section sm">
+    <div class="container">
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap:24px">
+        <blockquote class="card shadow">
+          <p>"Subí la conversión un 38% en dos semanas."</p>
+          <span class="muted">— Ana, e-commerce</span>
+        </blockquote>
+        <blockquote class="card shadow">
+          <p>"Implementación en una tarde y ya estábamos vendiendo."</p>
+          <span class="muted">— Luis, servicios</span>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PRECIOS ============== -->
+  <section id="precios" class="section">
+    <div class="container">
+      <h2>Planes simples</h2>
+      <p class="muted">Sin contratos. Cancela cuando quieras.</p>
+      <div class="grid pricing" style="margin-top:24px">
+        <div class="card plan shadow">
+          <h3>Básico</h3>
+          <p class="muted">Ideal para probar</p>
+          <div class="price">$0</div>
+          <ul class="muted">
+            <li>1 sección</li><li>Soporte por email</li><li>Actualizaciones mensuales</li>
+          </ul>
+          <a class="btn" href="#contacto" style="margin-top:12px">Elegir</a>
+        </div>
+        <div class="card plan pop shadow">
+          <h3>Pro</h3>
+          <p class="muted">El más popular</p>
+          <div class="price">$19/mes</div>
+          <ul class="muted">
+            <li>Hasta 6 secciones</li><li>Soporte prioritario</li><li>A/B testing básico</li>
+          </ul>
+          <a class="btn" href="#contacto" style="margin-top:12px">Elegir</a>
+        </div>
+        <div class="card plan shadow">
+          <h3>Empresa</h3>
+          <p class="muted">A tu medida</p>
+          <div class="price">Custom</div>
+          <ul class="muted">
+            <li>Integraciones</li><li>SLAs</li><li>Cuenta dedicada</li>
+          </ul>
+          <a class="btn" href="#contacto" style="margin-top:12px">Hablar ventas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CONTACTO ============== -->
+  <section id="contacto" class="section">
+    <div class="container">
+      <h2>Hablemos de tu proyecto</h2>
+      <p class="muted">Cuéntame qué necesitas y te contacto hoy.</p>
+      <form class="grid" style="grid-template-columns: 1fr 1fr; gap:16px" onsubmit="return handleSubmit(event)">
+        <div class="field">
+          <label>Nombre</label>
+          <input class="input" type="text" name="nombre" required/>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input class="input" type="email" name="email" required/>
+        </div>
+        <div class="field" style="grid-column: 1/-1">
+          <label>Mensaje</label>
+          <textarea name="mensaje" class="input" required></textarea>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center; grid-column: 1/-1">
+          <button class="btn" type="submit">Enviar</button>
+          <span class="muted" id="form-status" role="status"></span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="section sm">
+    <div class="container footer-grid">
+      <div class="f-col">
+        <div class="brand"><span class="logo"></span><span>TuMarca</span></div>
+        <p class="muted">© <span id="year"></span> Todos los derechos reservados.</p>
+      </div>
+      <div class="f-col">
+        <h3>Producto</h3>
+        <a class="muted" href="#features">Características</a><br/>
+        <a class="muted" href="#precios">Precios</a>
+      </div>
+      <div class="f-col">
+        <h3>Compañía</h3>
+        <a class="muted" href="#">Nosotros</a><br/>
+        <a class="muted" href="#">Carreras</a>
+      </div>
+      <div class="f-col">
+        <h3>Legal</h3>
+        <a class="muted" href="#">Términos</a><br/>
+        <a class="muted" href="#">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========= Utilidades JS: año actual, modo oscuro y formulario =========
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const toggleBtn = document.getElementById('toggle-theme');
+    let forcedTheme = null; // "light" | "dark" | null
+    toggleBtn.addEventListener('click', () => {
+      // Alterna entre temas forzados (independiente de prefers-color-scheme)
+      if(!forcedTheme){ forcedTheme = 'light'; document.documentElement.style.colorScheme='light'; }
+      else if(forcedTheme==='light'){ forcedTheme = 'dark'; document.documentElement.style.colorScheme='dark'; }
+      else { forcedTheme = null; document.documentElement.style.colorScheme=''; }
+      toggleBtn.textContent = forcedTheme === 'dark' ? '🌙' : forcedTheme === 'light' ? '☀️' : '🌓';
+    });
+
+    function handleSubmit(e){
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form).entries());
+      // Aquí podrías hacer fetch a tu backend o servicio (ej: Formspree)
+      console.log("Formulario:", data);
+      const status = document.getElementById('form-status');
+      status.textContent = "¡Mensaje enviado! Te contactaré pronto.";
+      form.reset();
+      setTimeout(()=> status.textContent="", 4000);
+      return false;
+    }
+
+    // ========= Componente de botón JS (si quieres crearlo dinámicamente) =========
+    function createButton({label="Click", variant="primary", size="md", onClick=()=>{}}={}){
+      const btn = document.createElement('button');
+      btn.className = `btn ${variant} ${size==='sm'?'sm':size==='lg'?'lg':''}`.trim();
+      btn.textContent = label;
+      btn.addEventListener('click', onClick);
+      return btn;
+    }
+    // Ejemplo: document.querySelector('.nav-actions').appendChild(createButton({label:"Demo", variant:"secondary"}))
+  </script>
+</body>
+</html>
